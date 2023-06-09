@@ -11,44 +11,48 @@ def home():
 
 
 # Endpoint for adding two numbers
-@app.route("/add")
+@app.route("/add", methods=["POST"])
 async def add():
-    num1 = int(request.args.get("num1"))
-    num2 = int(request.args.get("num2"))
+    data = await request.get_json()
+    num1 = data["num1"]
+    num2 = data["num2"]
     result = num1 + num2
-    digits = int(request.args.get("digits", default=2))
+    digits = data.get("digits", 2)
     result = round(result, digits)
-    return str(result)
+    return {"result": result}
 
 
-@app.route("/sub")
+@app.route("/sub", methods=["POST"])
 async def sub():
-    num1 = int(request.args.get("num1"))
-    num2 = int(request.args.get("num2"))
+    data = await request.get_json()
+    num1 = data["num1"]
+    num2 = data["num2"]
     result = num1 - num2
-    digits = int(request.args.get("digits", default=2))
+    digits = data.get("digits", 2)
     result = round(result, digits)
-    return str(result)
+    return {"result": result}
 
 
-@app.route("/mul")
+@app.route("/mul", methods=["POST"])
 async def mul():
-    num1 = int(request.args.get("num1"))
-    num2 = int(request.args.get("num2"))
+    data = await request.get_json()
+    num1 = data["num1"]
+    num2 = data["num2"]
     result = num1 * num2
-    digits = int(request.args.get("digits", default=2))
+    digits = data.get("digits", 2)
     result = round(result, digits)
-    return str(result)
+    return {"result": result}
 
 
-@app.route("/div")
+@app.route("/div", methods=["POST"])
 async def div():
-    num1 = int(request.args.get("num1"))
-    num2 = int(request.args.get("num2"))
+    data = await request.get_json()
+    num1 = data["num1"]
+    num2 = data["num2"]
     result = num1 / num2
-    digits = int(request.args.get("digits", default=2))
+    digits = data.get("digits", 2)
     result = round(result, digits)
-    return str(result)
+    return {"result": result}
 
 
 @app.get("/logo.png")
